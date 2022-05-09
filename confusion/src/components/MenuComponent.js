@@ -4,7 +4,34 @@ import { Media } from 'reactstrap';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody,
     CardTitle } from 'reactstrap';
 
-
+    function RenderMenuItem ({dish, onClick}) {
+        return (
+            <Card
+                onClick={() => onClick(dish.id)}>
+                <CardImg width="100%" src={dish.image} alt={dish.name} />
+                <CardImgOverlay>
+                    <CardTitle>{dish.name}</CardTitle>
+                </CardImgOverlay>
+            </Card>
+        );
+    }
+    function renderDish(dish) {
+        if (dish != null)
+            return(
+                <Card>
+                    <CardImg top src={dish.image} alt={dish.name} />
+                    <CardBody>
+                      <CardTitle>{dish.name}</CardTitle>
+                      <CardText>{dish.description}</CardText>
+                    </CardBody>
+                </Card>
+            );
+        else
+            return(
+                <div></div>
+            );
+    }
+    
 class Menu extends Component {
     constructor(props) {
         super(props);
@@ -57,7 +84,7 @@ class Menu extends Component {
             </div>
             <div className="row">
                 <div  className="col-12 col-md-5 m-1">
-                    {this.renderDish(this.state.selectedDish)}
+                    {this.renderDish(this.props.dishes[this.props.selectedDish])}
                 </div>
             </div>
           </div>
